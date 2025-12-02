@@ -5,7 +5,7 @@ import { Navigation} from "swiper/modules"
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function ChoiceSerieFilm() {
+export default function ChoiceSerieFilm({top10Shows}) {
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -56,11 +56,33 @@ export default function ChoiceSerieFilm() {
                                     <div className="text-sm text-center mt-1">{show.name}</div>
                                 </div>
                             </SwiperSlide>
-                            
                         ))}
+                        
                     </Swiper>
                 </div>
             ))}
+            <div>
+                <h2>Top ranked TV serie</h2>
+                <Swiper 
+                    slidesPerView={6}
+                    spaceBetween={30}
+                    rewind={true}>
+                    {top10Shows.map(showRatedTop => (
+                        <SwiperSlide key={showRatedTop.id} className="max-w-40">
+                            <div  className="rounded overflow-hidden">
+                                <span></span>
+                                <img className="w-full h-40 object-cover object-top rounded" src={showRatedTop.poster_path ? 
+                                    `https://image.tmdb.org/t/p/w300${showRatedTop.poster_path}`
+                                    : "https://via.placeholder.com/300x450?text=No+Image"} 
+                                    alt={showRatedTop.name} 
+                                />
+                                <div className="text-sm text-center mt-1">{showRatedTop.name}</div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+                    
         </div>
     )
 }

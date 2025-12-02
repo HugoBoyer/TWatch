@@ -26,4 +26,13 @@ app.get("/api/genres", async (req, res) => {
     res.json(data);
 });
 
+// top rated TV
+app.get("/api/top_rated", async (req, res) => {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
+    );
+    const data = await response.json();
+    res.json(data);
+});
+
 app.listen(3000, () => console.log("Serveur proxy sécurisé sur http://localhost:3000"));
