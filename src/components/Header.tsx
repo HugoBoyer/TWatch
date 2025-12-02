@@ -16,15 +16,7 @@ export default function Header() {
                                     <Link to={"/"} className="text-white rounded-md px-3 py-2 text-sm md:text-[13px]  sm:text-base font-medium text-[#030303] relative group">
                                         Home  
                                         <span className="absolute left-1/2  -translate-x-1/2 bottom-0 h-[2px] w-0 bg-[#ffffff] transition-all duration-300 group-hover:w-[70%]"></span>
-                                    </Link>
-                                    <Link to={"/price"} className="text-white md:text-[13px] rounded-md px-3 py-2 text-sm  sm:text-base font-medium text-[#030303]  group relative">
-                                        Pricing
-                                        <span className="absolute left-1/2  -translate-x-1/2 bottom-0 h-[2px] w-0 bg-[#ffffff] transition-all duration-300 group-hover:w-[70%]"></span>
-                                    </Link>
-                                    <Link to={"/contact"} className="text-white md:text-[13px] rounded-md px-3 py-2 text-sm  sm:text-base font-medium text-[#030303] group relative">
-                                        Contact
-                                        <span className="absolute left-1/2  -translate-x-1/2 bottom-0 h-[2px] w-0 bg-[#ffffff] transition-all duration-300 group-hover:w-[70%]"></span>
-                                    </Link>                     
+                                    </Link>                 
                                 </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-2">

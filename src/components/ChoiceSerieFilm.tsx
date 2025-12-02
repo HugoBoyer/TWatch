@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation} from "swiper/modules"
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function ChoiceSerieFilm() {
     const [data, setData] = useState({});
@@ -31,21 +36,32 @@ export default function ChoiceSerieFilm() {
         <div className="mx-auto px-20">
             <h2>Trending TV Series (par genre)</h2>
             {Object.entries(data).map(([genre , shows ]) => (   
-                <div key={genre}>
+                <div key={genre} className="my-8">
                     <h3>{genre}</h3>
-                    <div className="gap-5 grid grid-cols-6">
+                    <Swiper 
+                        slidesPerView={6}   
+                        spaceBetween={10}
+                        navigation={true}
+                        modules={[Navigation]}
+                        rewind={true}
+                    >
                         {shows.map(show => (
-                            <div key={show.id} className="bg-white rounded overflow-hidden">
-                                <img src={show.poster_path ? 
-                                    `https://image.tmdb.org/t/p/w300${show.poster_path}`
-                                    : "https://via.placeholder.com/300x450?text=No+Image"} 
-                                    alt={show.name} 
-                                />
-                            </div>
+                            <SwiperSlide key={show.id}>
+                                <div  className="rounded overflow-hidden">
+                                    <img className="w-full h-40 object-cover object-top rounded" src={show.backdrop_path ? 
+                                        `https://image.tmdb.org/t/p/w300${show.backdrop_path}`
+                                        : "https://via.placeholder.com/300x450?text=No+Image"} 
+                                        alt={show.name} 
+                                    />
+                                    <div className="text-sm text-center mt-1">{show.name}</div>
+                                </div>
+                            </SwiperSlide>
+                            
                         ))}
-                    </div>
+                    </Swiper>
                 </div>
             ))}
         </div>
     )
 }
+
