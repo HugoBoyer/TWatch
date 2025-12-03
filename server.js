@@ -68,4 +68,19 @@ app.get("/api/:type/:id/videos", async (req, res) => {
     }
 });
 
+
+app.get("/api/tv/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur récupération détails" });
+  }
+});
+
+
 app.listen(3000, () => console.log("Serveur proxy sécurisé sur http://localhost:3000"));

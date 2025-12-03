@@ -1,0 +1,65 @@
+import { useParams } from "react-router";
+import Header from "../components/Header";
+import { useEffect, useState } from "react";
+
+export function DetailSerie() {
+    const {id} = useParams()
+    console.log("ID serie", id)
+    const [data, setData] = useState(null)
+    const [videos, setVideos] = useState([]);
+    
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch(`http://localhost:3000/api/tv/${id}`)
+            const json = await res.json()
+            setData(json)
+        
+
+            const videoRes = await fetch(`http://localhost:3000/api/tv/${id}/videos`);
+            const videoJson = await videoRes.json();
+            setVideos(videoJson.results || []);
+        }
+        fetchData()
+    }, [id])
+
+    if (!data) return <p>Chargement...</p>;
+
+    return (
+        <>
+            <Header />  
+            <div className="flex">
+                <div>
+                    <img src={data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
+                    alt={data.name} />
+                    <p>Ma note etoile</p>
+                    <p>Du {data.first_air_date}</p>
+                    <p>Au {data.first_air_date}</p>
+                    <p>Série de </p>
+                    <p>Type</p>
+                    <p>Genres: </p>
+                    <p>Pays d'origine: </p>
+                    <p>Diffusseur:</p>
+                </div>
+                <div>
+                    <div>
+                        <h1>{data.name}</h1>
+                        <p></p>
+                        <h2>{data.vote_average}</h2>
+                    </div>
+                    <div>
+                        <h3>Fiche technique</h3>
+                        <p>description</p>
+                        <h3>CASTING</h3>
+                        <ul>
+                            <li>Acteur</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Bande Annonce</h3>
+                        <video controls ></video>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}

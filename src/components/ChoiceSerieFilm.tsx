@@ -38,7 +38,7 @@ export default function ChoiceSerieFilm({top10Shows}) {
         <div className="mx-auto px-20">
             <h2>Trending TV Series (par genre)</h2>
             {Object.entries(data).map(([genre , shows ]) => (   
-                <div key={genre} className="my-8">
+                <div key={genre} className="my-8 py-8">
                     <h3>{genre}</h3>
                     <Swiper 
                         slidesPerView={6}   
@@ -48,9 +48,9 @@ export default function ChoiceSerieFilm({top10Shows}) {
                         rewind={true}
                     >
                         {shows.map(show => (
-                            <SwiperSlide key={show.id} className={hoveredId === show.id ? "z-50" : "z-0"}>
-                                    <MediaSlide show={show} 
-                                    onHoverChange={(hover, id) => setHoveredId(hover ? id : null)}/>
+                            <SwiperSlide key={show.id} className={hoveredId === show.id ? "z-50 " : "z-0"}>
+                                <MediaSlide show={show} 
+                                onHoverChange={(hover, id) => setHoveredId(hover ? id : null)}/>
                             </SwiperSlide>
                         ))}
                         

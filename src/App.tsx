@@ -1,11 +1,14 @@
+import { Route, Routes } from 'react-router'
 import Home from './pages/Home'
+import { DetailSerie } from './pages/DetailSerie'
 
 function App() {
 
   return (
-    <> 
-      <Home />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/serie/:nom/:id" element={<DetailSerie />} />   
+    </Routes>
   )
 }
 
