@@ -8,6 +8,7 @@ import MediaSlide from "./MediaSlide";
 
 export default function ChoiceSerieFilm({top10Shows}) {
     const [data, setData] = useState({});
+    const [hoveredId, setHoveredId] = useState(null); // 👈 nouvel état
 
     useEffect(() => {
         async function load() {
@@ -47,9 +48,9 @@ export default function ChoiceSerieFilm({top10Shows}) {
                         rewind={true}
                     >
                         {shows.map(show => (
-                            <SwiperSlide key={show.id}>
-                                    <MediaSlide show={show} />
-                                    <div className="text-sm text-center mt-1">{show.name}</div>
+                            <SwiperSlide key={show.id} className={hoveredId === show.id ? "z-50" : "z-0"}>
+                                    <MediaSlide show={show} 
+                                    onHoverChange={(hover, id) => setHoveredId(hover ? id : null)}/>
                             </SwiperSlide>
                         ))}
                         
