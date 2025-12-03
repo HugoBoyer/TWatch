@@ -17,7 +17,7 @@ export default function Caroussel({ items }) {
             >
                 {items.map((show) => (
                     <SwiperSlide key={show.id } className="max-h-180">
-                        <img className="w-full h-auto object-cover"
+                        <img className="w-full h-auto object-cover object-top"
                             src={show.backdrop_path ? 
                                 `https://image.tmdb.org/t/p/w1280${show.backdrop_path}`:
                                 "https://via.placeholder.com/300x450?text=No+Image"

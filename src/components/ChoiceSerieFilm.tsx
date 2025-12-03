@@ -4,6 +4,7 @@ import { Navigation} from "swiper/modules"
 
 import "swiper/css";
 import "swiper/css/navigation";
+import MediaSlide from "./MediaSlide";
 
 export default function ChoiceSerieFilm({top10Shows}) {
     const [data, setData] = useState({});
@@ -47,14 +48,8 @@ export default function ChoiceSerieFilm({top10Shows}) {
                     >
                         {shows.map(show => (
                             <SwiperSlide key={show.id}>
-                                <div  className="rounded overflow-hidden">
-                                    <img className="w-full h-40 object-cover object-top rounded" src={show.backdrop_path ? 
-                                        `https://image.tmdb.org/t/p/w300${show.backdrop_path}`
-                                        : "https://via.placeholder.com/300x450?text=No+Image"} 
-                                        alt={show.name} 
-                                    />
+                                    <MediaSlide show={show} />
                                     <div className="text-sm text-center mt-1">{show.name}</div>
-                                </div>
                             </SwiperSlide>
                         ))}
                         
@@ -62,15 +57,17 @@ export default function ChoiceSerieFilm({top10Shows}) {
                 </div>
             ))}
             <div>
-                <h2>Top ranked TV serie</h2>
+                <h2 className="uppercase">Top 10 TV</h2>
                 <Swiper 
                     slidesPerView={6}
-                    spaceBetween={30}
-                    rewind={true}>
+                    spaceBetween={100}
+                    rewind={true}
+                    navigation={true}
+                    modules={[Navigation]}
+                    >
                     {top10Shows.map(showRatedTop => (
-                        <SwiperSlide key={showRatedTop.id} className="max-w-40">
+                        <SwiperSlide key={showRatedTop.id} className="max-w-55">
                             <div  className="rounded overflow-hidden">
-                                <span></span>
                                 <img className="w-full h-40 object-cover object-top rounded" src={showRatedTop.poster_path ? 
                                     `https://image.tmdb.org/t/p/w300${showRatedTop.poster_path}`
                                     : "https://via.placeholder.com/300x450?text=No+Image"} 
