@@ -27,16 +27,16 @@ export function DetailSerie() {
     return (
         <>
             <Header />  
-            <div className="flex">
+            <div className="flex mx-auto px-20">
                 <div>
-                    <img src={data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
-                    alt={data.name} />
+                    <img className="h-100" src={data?.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
+                    alt={data?.name} />
                     <p>Ma note etoile</p>
-                    <p>Du {data.first_air_date}</p>
-                    <p>Au {data.first_air_date}</p>
+                    <p>Du {data?.first_air_date}</p>
+                    <p>Au {data?.first_air_date}</p>
                     <p>Série de </p>
                     <p>Type</p>
-                    <p>Genres: </p>
+                    <p>Genres: {data?.genres.map(g => g.name).join(", ")}</p>
                     <p>Pays d'origine: </p>
                     <p>Diffusseur:</p>
                 </div>
@@ -56,7 +56,21 @@ export function DetailSerie() {
                     </div>
                     <div>
                         <h3>Bande Annonce</h3>
-                        <video controls ></video>
+                        {videos.length > 0 ? (
+                            (() => {
+                            const trailer = videos.find(v => v.type === "Trailer" && v.site === "YouTube");
+                            return trailer ? (
+                                <iframe
+                                width="560"
+                                height="315"
+                                src={`https://www.youtube.com/embed/${trailer.key}?autoplay=0&controls=1`}
+                                title={trailer.name}
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                ></iframe>
+                            ) : <p>Aucune bande-annonce disponible</p>;
+                            })()
+                        ) : <p>Chargement des vidéos...</p>}
                     </div>
                 </div>
             </div>
