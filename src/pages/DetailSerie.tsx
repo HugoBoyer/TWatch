@@ -35,9 +35,9 @@ console.log("ID serie", id)
     return (
         <>
             <Header />  
-            <div className="flex mx-auto px-20 gap-12">
+            <div className="flex mx-auto px-20 gap-14">
                 <div>
-                    <img className="h-100" src={data?.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
+                    <img className="h-100 w-180 " src={data?.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
                     alt={data?.name} />
                     <p>Ma note etoile</p>
                     <p>Du {data?.first_air_date}</p>
@@ -50,18 +50,18 @@ console.log("ID serie", id)
                 </div>
                 <div>
                     <div>
-                        <h1 className="md:text-4xl">{data.name}</h1>
+                        <h1 className="md:text-6xl font-bold">{data.name}</h1>
                         <p></p>
-                        <h2>{data.vote_average}</h2>
+                        <h2 className=" md:text-2xl font-bold">{data.vote_average}</h2>
                     </div>
                     <div>
-                        <h3>Fiche technique</h3>
-                        <p>description</p>
-                        <h3>CASTING</h3>
+                        <h3 className="pb-5">Fiche technique</h3>
+                        <p className="md: pr-70 pb-5">description {data.overview}</p>
+                        <h3 className="border-b-2 pb-5 mb-5">CASTING</h3>
                         <ul className="grid grid-cols-6 gap-4">
                             {actor.map(a => (
                                 <li key={a.id}>
-                                    <img className="w-33 rounded-lg" src={a.profile_path ? 
+                                    <img className="rounded-lg" src={a.profile_path ? 
                                         `https://image.tmdb.org/t/p/w500${a.profile_path}`:
                                         "https://via.placeholder.com/300x450?text=No+Image"
                                     } alt={`Poster de l'acteur ${a.name}`} />
