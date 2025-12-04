@@ -22,7 +22,7 @@ export function DetailSerie() {
 
             const actorRes = await fetch(`http://localhost:3000/api/tv/${id}/credits`);
             const actorJson = await actorRes.json();
-            setActor(actorJson  || []);
+            setActor(actorJson.cast   || []);
         }
         fetchData()
     }, [id])
@@ -35,7 +35,7 @@ console.log("ID serie", id)
     return (
         <>
             <Header />  
-            <div className="flex mx-auto px-20">
+            <div className="flex mx-auto px-20 gap-12">
                 <div>
                     <img className="h-100" src={data?.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "https://via.placeholder.com/300x450"} 
                     alt={data?.name} />
@@ -50,7 +50,7 @@ console.log("ID serie", id)
                 </div>
                 <div>
                     <div>
-                        <h1>{data.name}</h1>
+                        <h1 className="md:text-4xl">{data.name}</h1>
                         <p></p>
                         <h2>{data.vote_average}</h2>
                     </div>
@@ -58,14 +58,18 @@ console.log("ID serie", id)
                         <h3>Fiche technique</h3>
                         <p>description</p>
                         <h3>CASTING</h3>
-                        <ul>
+                        <ul className="grid grid-cols-6 gap-4">
                             {actor.map(a => (
                                 <li key={a.id}>
-                                {a.name} — <span className="text-gray-400">{a.character}</span>
+                                    <img className="w-33 rounded-lg" src={a.profile_path ? 
+                                        `https://image.tmdb.org/t/p/w500${a.profile_path}`:
+                                        "https://via.placeholder.com/300x450?text=No+Image"
+                                    } alt={`Poster de l'acteur ${a.name}`} />
+                                    {a.name} — 
+                                    <p className="text-gray-400">{a.character}</p>
                                 </li>
                             ))}
                         </ul>
-
                     </div>
                     <div>
                         <h3>Bande Annonce</h3>
