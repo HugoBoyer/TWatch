@@ -82,5 +82,19 @@ app.get("/api/tv/:id", async (req, res) => {
   }
 });
 
+app.get("/api/tv/:id/credits", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
+    );
+    const data = await response.json();
+    res.json( {cast: data.cast}); // renvoie uniquement les acteurs
+  } catch (err) {
+    res.status(500).json({ error: "Erreur lors de la récupération du cast" });
+  }
+});
+
+
 
 app.listen(3000, () => console.log("Serveur proxy sécurisé sur http://localhost:3000"));

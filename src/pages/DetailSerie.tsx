@@ -7,6 +7,7 @@ export function DetailSerie() {
     console.log("ID serie", id)
     const [data, setData] = useState(null)
     const [videos, setVideos] = useState([]);
+    const [actor, setActor] = useState([])
     
     useEffect(() => {
         async function fetchData() {
@@ -18,9 +19,16 @@ export function DetailSerie() {
             const videoRes = await fetch(`http://localhost:3000/api/tv/${id}/videos`);
             const videoJson = await videoRes.json();
             setVideos(videoJson.results || []);
+
+            const actorRes = await fetch(`http://localhost:3000/api/tv/${id}/credits`);
+            const actorJson = await actorRes.json();
+            setActor(actorJson  || []);
         }
         fetchData()
     }, [id])
+
+console.log("ID serie", id)
+// → 223300
 
     if (!data) return <p>Chargement...</p>;
 
@@ -51,8 +59,13 @@ export function DetailSerie() {
                         <p>description</p>
                         <h3>CASTING</h3>
                         <ul>
-                            <li>Acteur</li>
+                            {actor.map(a => (
+                                <li key={a.id}>
+                                {a.name} — <span className="text-gray-400">{a.character}</span>
+                                </li>
+                            ))}
                         </ul>
+
                     </div>
                     <div>
                         <h3>Bande Annonce</h3>
